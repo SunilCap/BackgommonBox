@@ -49,10 +49,30 @@ python3 -m http.server 8080
 - Legal-move checking: blocked points, hitting blots, forced bar re-entry
   before any other move, bearing off only once all fifteen checkers are home
   (including the "use the extra pips on the farthest checker" rule).
-- Pip count for both sides, undo-last-move (within the current turn), and a
-  win screen when someone bears off all fifteen checkers.
+- Pip count for both sides, undo-last-move (within the current turn), a
+  manual "Done" button to end your turn early, and a win screen when someone
+  bears off all fifteen checkers.
 - Not implemented: the doubling cube, match/money scoring, and an AI
   opponent — this is built for two people sharing one device.
+
+## Layout
+
+The board follows a classic split-panel design: two separate wooden panels
+side by side (left = the outer board, points 7–18; right = the home board,
+points 1–6 and 19–24), with the bar as the narrow strip between them where
+hit checkers wait to re-enter. Player cards sit above and below the board
+and light up green on whichever side's turn it is. It's built portrait-only:
+
+- `manifest.json` sets `"orientation": "portrait"`, so once installed to a
+  home screen (see below), Android will keep it locked to portrait automatically.
+- The page also makes a best-effort call to the Screen Orientation API to
+  lock portrait — this only works once installed/running full-screen on
+  browsers that support it (mainly Android Chrome); it's a no-op elsewhere.
+- If someone does rotate to landscape on a phone, a "please rotate back"
+  overlay appears rather than trying to render the board sideways. iOS
+  Safari has no orientation-lock API at all, so on iPhone the overlay is
+  the main defense — there's no way to truly force portrait there short of
+  wrapping the page in a native app shell.
 
 ## Customizing
 
